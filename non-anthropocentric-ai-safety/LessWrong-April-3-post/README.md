@@ -13,3 +13,6 @@ That part gives rise to the following actionable items of research:
   * Cooperation versus competition in multi-agent systems
   * Ability to competently perform moral reasoning
   * Studying the technical problems of rapidly self-improving systems including stability and invariance of some important goals, values, and constraints
+
+But the situation also does depend a lot on how the world actually works (which is something we don't know,
+and something better thinkers will likely discover; what's safe and what's not safe will crucially depend on that).
