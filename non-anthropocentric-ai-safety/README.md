@@ -4,10 +4,10 @@ I have been looking at issues related to technological singularity and AI existe
 
 This year I have returned to this topic because of the seismic shocks associated with the latest LLM revolution.
 
-Looking back, it is clear that I was always focusing on **non-anthropocentric approaches**. This makes my research
+Looking back, it is clear that I have always been focusing on **non-anthropocentric approaches**. This makes my research
 sufficiently unusual, and so it makes sense to continue it and to keep good notes.
 
-Here is what I wrote in December 2012:
+Here is what I have written in December 2012:
 
 > **Thinking about talks at AGI-Impacts 2012 conference**
 > 
@@ -18,12 +18,12 @@ Here is what I wrote in December 2012:
 > The idea of trying to control or manipulate an entity which is much smarter than a human does not seem ethical, feasible, or wise. What we might try to aim for is a respectful interaction. 
 
 One thing which is no longer true today is "we are not really using software tools to help us understand the issues involved in Friendly AI";
-in fact, all fruitful progress in the field is currently associated with using AI to help solving various relevant issues.
+in fact, all fruitful progress in the field is currently associated with using AI to help with solving various relevant issues.
 
-Speaking of 2023, I was the second author of _"Safety without alignment"_ paper and I wrote LessWrong post
+Speaking of 2023, I have been the second author of _"Safety without alignment"_ paper and I have written LessWrong post
 _"Exploring non-anthropocentric aspects of AI existential safety"_ and a number of related comments on the site.
 
-There have been also a number of privately shared notes. There is a lot of discussion recently on what could be
+There have also been a number of privately shared notes. There is a lot of discussion recently on what could be
 shared, and what should be kept private in order not to cause further deterioration of the situation with
 existential safety. I'll see what I can distill into publicly sharable materials.
 
