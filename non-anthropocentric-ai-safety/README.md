@@ -23,5 +23,9 @@ in fact, all fruitful progress in the field is currently associated with using A
 Speaking of 2023, I was the second author of _"Safety without alignment"_ paper and I wrote LessWrong post
 _"Exploring non-anthropocentric aspects of AI existential safety"_ and a number of related comments on the site.
 
-There have been also a number of privately shared notes. 
+There have been also a number of privately shared notes. There is a lot of discussion recently on what could be
+shared, and what should be kept private in order not to cause further deterioration of the situation with
+existential safety. I'll see what I can distill into publicly sharable materials.
+
+Here I'll try to structure information in various subdirectories.
 
