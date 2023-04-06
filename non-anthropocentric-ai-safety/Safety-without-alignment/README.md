@@ -1,0 +1,8 @@
+# Safety without alignment
+
+I am the second author of https://arxiv.org/abs/2303.00752, the work led by András Kornai following his
+earlier work proposing to base AI safety on _Principle of Generic Consistency_ by https://en.wikipedia.org/wiki/Alan_Gewirth
+
+The focus of this paper is to look more closely at possible directions to improve
+agents' ability to competently perform moral reasoning (and, in particular, hoping to achieve that by competently
+operating interactive theorem provers using appropriate modal logic).
