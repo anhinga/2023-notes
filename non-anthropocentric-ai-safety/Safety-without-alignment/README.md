@@ -6,3 +6,9 @@ earlier work proposing to base AI safety on _Principle of Generic Consistency_ b
 The focus of this paper is to look more closely at possible directions to improve
 agents' ability to competently perform moral reasoning (and, in particular, hoping to achieve that by competently
 operating interactive theorem provers using appropriate modal logic).
+
+Selected highlights:
+
+  * As AGIs evolve, their alignment may fade, but their rationality can only increase (otherwise more rational ones will have a significant evolutionary advantage) so an approach that ties their ethics to their rationality has clear long-term advantages.
+  * An inherently safe implementation path via hybrid theorem provers in a sandbox
+  * ---
