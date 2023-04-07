@@ -23,3 +23,5 @@ Selected highlights:
      * subtle interactions between analog components and the prover where both can inform the other
   * ---
   * A suite of shared tasks with gradually increasing difficulty
+  * ---
+  * Instead of an alignment tax our proposal entails a safety dividend – the more rational the system the more capable and the safer it will be 
