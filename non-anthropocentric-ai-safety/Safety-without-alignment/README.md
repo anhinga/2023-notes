@@ -15,3 +15,11 @@ Selected highlights:
   * Alignment is only one, and in our opinion not even the best approach to what humanity actually needs, which is safety guarantees
   * We could simply say that we consider the AI-as-slave paradigm unethical. We do ...  But in a world of realpolitik such moralizing carries little weight. Instead, we argue that there is no practical reason for shackling AI with human values ... Furthermore, it is well understood that as an agent evolves, so do its capabilities of avoiding any externally imposed constraints, and it is just not safe to enslave an ever improving agent. 
   * Instead, safety should be based on mechanisms that get stronger as the agent evolves.
+  * ---
+  * Test suite of difficult ethical problems
+  * ---
+  * Plan to hybridize discrete deductive reasoning with optimization-based continuous systems such as LLMs
+     * experiment with different architectures in a safe sandbox that allows only for theorem proving (theorem provers are the only effectors)
+     * subtle interactions between analog components and the prover where both can inform the other
+  * ---
+  * A suite of shared tasks with gradually increasing difficulty
