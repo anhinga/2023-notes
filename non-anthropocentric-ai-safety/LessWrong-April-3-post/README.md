@@ -16,3 +16,5 @@ That part gives rise to the following actionable items of research:
 
 But the situation also does depend a lot on how the world actually works (which is something we don't know,
 and something better thinkers will likely discover; what's safe and what's not safe will crucially depend on that).
+
+A discussion: https://astralcodexten.substack.com/p/most-technologies-arent-races/comment/14254262
