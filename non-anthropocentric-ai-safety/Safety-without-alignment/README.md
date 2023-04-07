@@ -9,6 +9,9 @@ operating interactive theorem provers using appropriate modal logic).
 
 Selected highlights:
 
-  * As AGIs evolve, their alignment may fade, but their rationality can only increase (otherwise more rational ones will have a significant evolutionary advantage) so an approach that ties their ethics to their rationality has clear long-term advantages.
+  * As AGIs evolve, their alignment may fade, but their rationality can only increase (otherwise more rational ones will have a significant evolutionary advantage) so an approach that ties their ethics to their rationality has clear long-term advantages
   * An inherently safe implementation path via hybrid theorem provers in a sandbox
   * ---
+  * Alignment is only one, and in our opinion not even the best approach to what humanity actually needs, which is safety guarantees
+  * We could simply say that we consider the AI-as-slave paradigm unethical. We do ...  But in a world of realpolitik such moralizing carries little weight. Instead, we argue that there is no practical reason for shackling AI with human values ... Furthermore, it is well understood that as an agent evolves, so do its capabilities of avoiding any externally imposed constraints, and it is just not safe to enslave an ever improving agent. 
+  * Instead, safety should be based on mechanisms that get stronger as the agent evolves.
