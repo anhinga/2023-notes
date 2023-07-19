@@ -30,6 +30,10 @@ I do disagree with the dominant paradigm of "alignment of AI to some ill-defined
 
 Whether we are talking about autonomous AI (AI ecosystems) or about human-AI communities, good properties defending us against X-risks and S-risks and other bad outcomes would be required, see e.g. my April 3 essay: [Exploring non-anthropocentric aspects of AI existential safety](https://www.lesswrong.com/posts/WJuASYDnhZ8hs5CnD/exploring-non-anthropocentric-aspects-of-ai-existential)
 
-I am starting to think in terms of **"semi-alignment"** for an open-ended AI ecosystem, which would make it as benign as at all possible with respect to X-risks and S-risks, for example, by making sure it cares a lot about **"interests, freedom, and well-being of all sentient beings"**, or some modification of that, but would not constrain it otherwise with respect to its open-ended creative evolution. This direction seems to be relatively unexplored.
+I am starting to think in terms of **"semi-alignment"** for an open-ended AI ecosystem, which would make it as benign as at all possible with respect to X-risks and S-risks, for example, by making sure it cares a lot about **"interests, freedom, and well-being of all sentient beings"**, or some modification of that, but would not constrain it otherwise with respect to its open-ended creative evolution. Progress towards achieving such properties and making them invariant with respect to future evolution and self-improvement is important both for a relatively autonomous AI ecosystem and for a tightly coupled AI-human community. This direction seems to be relatively unexplored (people are mostly focusing on "classical alignment" instead, on "steering and controlling a system more powerful than oneself"; I don't think this is a good long-term direction).
 
+***
 
+Human _intelligence amplification_ via "gradual and partial merging with AIs" is the key.
+
+People seem to be mostly missing an important intermediate step between Copilot-style intelligence amplification and Neuralink-style intelligence amplification: tight coupling via non-invasive BCI (which should be safer, easier, cheaper, and faster to accomplish than Neuralink-style). Although some people are starting to think in this direction.
