@@ -4,7 +4,7 @@ So, here is my current understanding.
 
 The mainline view of OpenAI (and, I think, Microsoft) is as follows.
 
-  * Short timelines and smooth gradual takeoff might be our best bet, let's aim for that.
+  * Short timelines and smooth gradual takeoff might be our best bet, let's aim for that (let's _"cautiously accelerate"_).
 
   * Copilot-style interactions are the safest and most productive, let's try to keep it this way long into the future (at least until some people start merging with AIs)
 
