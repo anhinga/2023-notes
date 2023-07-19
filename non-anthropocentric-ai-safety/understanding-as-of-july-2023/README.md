@@ -13,3 +13,19 @@ This talk with Ilya Sutskever, "What AI is Making Possible", https://www.youtube
   * See, in particular, his discussion at 16:04-22:06, so 6 minutes of that.
 
 ***
+
+Because of this focus, the issues of AI existential safety for completely autonomous AI can hopefully be pushed long into the future (and to the time when there is no firm boundary between humanity and AI, due to Neuralink-style integration for willing participants and such).
+
+***
+
+Stepping back, the uncertainty about possible future scenarios is high: https://www.lesswrong.com/posts/SRW9WAEEKJEgHAhSy/60-possible-futures
+
+***
+
+I do disagree with the dominant paradigm of "alignment of AI to ill-defined human values". In any case, the notion of alignment is not well-defined: https://www.lesswrong.com/posts/ZKeNbGBf36ZEgDEKD/types-and-degrees-of-alignment
+
+***
+
+Whether we are talking about autonomous AI (AI ecosystems) or about human-AI communities, good properties defending us against X-risks and S-risks and other bad outcomes would be required, see e.g. my April 3 essay: https://www.lesswrong.com/posts/WJuASYDnhZ8hs5CnD/exploring-non-anthropocentric-aspects-of-ai-existential
+
+
