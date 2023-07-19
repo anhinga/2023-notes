@@ -37,3 +37,7 @@ I am starting to think in terms of **"semi-alignment"** for an open-ended AI eco
 Human _intelligence amplification_ via "gradual and partial merging with AIs" is the key.
 
 People seem to be mostly missing an important intermediate step between Copilot-style intelligence amplification and Neuralink-style intelligence amplification: tight coupling via non-invasive BCI (which should be safer, easier, cheaper, and faster to accomplish than Neuralink-style). Although some people are starting to think in this direction.
+
+***
+
+Unexpected, uncontrolled foom is a risk - what should we do about this (now and in the future)? How to make sure that any foom process does maintain some kind of semi-alignment and sufficient care about conservation and about well-being and autonomy of others?
