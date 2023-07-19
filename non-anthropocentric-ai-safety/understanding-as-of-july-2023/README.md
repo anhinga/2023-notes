@@ -1,6 +1,8 @@
 I have been engaging with AI existential safety issues on LessWrong and elsewhere quite a bit in the last few months.
 
-So, here is my current understanding.
+Here is my current understanding.
+
+***
 
 The mainline view of OpenAI (and, I think, Microsoft) is as follows.
 
