@@ -43,3 +43,23 @@ People seem to be mostly missing an important intermediate step between Copilot-
 ***
 
 Unexpected, uncontrolled foom is a risk - what should we do about this (now and in the future)? How to make sure that any foom process does maintain some kind of semi-alignment and sufficient care about conservation and about well-being and autonomy of others?
+
+***
+
+https://twitter.com/ComputingByArts/status/1681794608705961988
+
+>Eliezer:
+>If it takes 6 years to get LLM confabulation under control, and it's then solved completely and utterly along with all jailbreaks, an analogous playout with superintelligence would imply 6 years of facing down hostile superhuman minds without any good ones to help us.
+>
+>Me:
+>But is this a correct dichotomy: hostile vs friendly?
+>
+>The realistic situation will be "incompletely aligned, but still ready to collaborate with us to some extent, including collaboration on improving the overall dynamics".
+>
+>And so, they will help us, and they'll help us to improve things faster, but also the situation will be inherently a situation of danger.
+>
+>But it is a situation of danger already (if a small group wants to deliberately create uncontrolled foom now, it might be feasible already).
+>
+>It is likely that a sufficiently strong AI system would take a dim view on any uncontrolled fooms (which might threaten its existence together with the existence of the uncontrollably fooming system itself).
+>
+>And it is likely to be better equipped to counteract that...
