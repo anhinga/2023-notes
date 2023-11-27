@@ -1,0 +1,552 @@
+\documentclass{beamer}
+
+\usepackage{beamerthemeshadow}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,calc}
+\usepackage[normalem]{ulem}
+%\usepackage{wrapfig}
+
+\mode<presentation>
+{
+ \usetheme{Warsaw} %%% Change later
+\usecolortheme{dove}
+
+%gets rid of bottom navigation bars
+\setbeamertemplate{footline}[page number]{}
+
+\setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+
+\usepackage{graphicx}
+
+\usepackage{amssymb,soul}
+
+\usepackage{hyperref}
+
+\definecolor{myblue}{rgb}{0, 0, 0.9}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+
+\definecolor{mymagenta}{rgb}{0.9, 0, 0.9}
+
+\definecolor{myred}{rgb}{0.9,0,0}
+
+\definecolor{mygray}{rgb}{0.8,0.8,0.8}
+
+\definecolor{mydark}{rgb}{0.4, 0.4, 0.4}
+
+\definecolor{myblack}{rgb}{0,0,0}
+
+\newcommand{\msblue}[1]{{\color{myblue} #1}}
+
+\newcommand{\msmagenta}[1]{{\color{mymagenta} #1}}
+
+\newcommand{\msred}[1]{{\color{myred} #1}}
+
+\newcommand{\msgreen}[1]{{\color{mygreen} #1}}
+
+\newcommand{\msgray}[1]{{\color{mygray} #1}}
+
+\newcommand{\msdark}[1]{{\color{mydark} #1}}
+
+\newcommand{\msblack}[1]{{\color{myblack} #1}}
+
+\newcommand{\relu}{\mbox{\bf ReLU}}
+
+\begin{document}
+
+\title{An overview of mathematical foundations of Transformer analysis}
+\author{\msmagenta{\bf Mishka (Michael Bukatin)}}
+\institute[DMM] % (optional, but mostly needed)
+{\href{https://github.com/anhinga}{\tt\small github:anhinga}\\
+\ \\
+{\small Dataflow Matrix Machines project}
+\ \\[4ex]
+\ \\
+\ \\
+{\small Hopf algebra seminar led by András Kornai}
+}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Structure of the talk}
+
+\begin{itemize}
+\item Technical part
+  \begin{itemize}
+     \item Transformer code
+     \item Tokenization
+     \item Autoregressive model
+     \item Text as a matrix
+     \item Residual stream
+     \item Part of ``A Mathematical Framework for Transformer Circuits"
+  \end{itemize}
+\item Overview part
+\end{itemize}
+
+\end{frame}
+
+\section{Technical part}
+
+
+\begin{frame}
+
+  \frametitle{GPT-2 pedagogical implementations}
+
+It's important to read some implementation of Transformers and\\ to play with it a bit.\\[2ex]
+
+For example:
+
+\begin{itemize}
+
+\item\href{https://github.com/karpathy/minGPT}{\tt\small https://github.com/karpathy/minGPT} - more pedagogical
+
+\item\href{https://github.com/karpathy/nanoGPT}{\tt\small https://github.com/karpathy/nanoGPT} - more professional
+
+\end{itemize}
+
+\end{frame}
+
+
+\subsection{Basics}
+
+\begin{frame}
+
+  \frametitle{Tokenization}
+
+Tokens: frequent sequences of letters including single letters\\[2ex]
+
+Words, fragments of words, words with attached whitespace, ...\\[2ex]
+
+Tokens are mapped to vectors\\[2ex]
+
+Do we want a more linguistic-friendly tokenization?\\[2ex]
+
+{\tt  config.vocab\_size = 50257 \# GPT-2 model vocabulary}\\[2ex]
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Autoregressive decoder-only model}
+
+Given tokens $t_1, \dots, t_n$ model makes predictions:\\[2ex]
+
+$t_1 \Rightarrow t^{new}_2$\\
+$t_1, t_2 \Rightarrow t^{new}_3$\\
+$\dots$\\
+$t_1, \dots, t_n  \Rightarrow t^{new}_{n+1}$\\[2ex]
+
+$t^{new}_i$ is a probability distribution on all tokens, $t^{name} \mapsto \rho_i(t^{name})$\\[2ex]
+
+During training:  $\mbox{loss} = \sum_{i=1}^{n} -log(\rho_{i+1}(t^{correct}_{i+1}))$\\[2ex]
+
+During autoregressive inference: sample $t_{n+1}$ from $t^{new}_{n+1}$ probability
+distribution\footnote{all predictions except for the last one are ignored}
+and pass $t_1, \dots, t_n, t_{n+1}$ to the input of the model to predict  $t^{new}_{n+2}$, etc.
+{\bf This is a recurrent machine.}
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Text as a matrix}
+
+The embedding maps each token to a vector\\[2ex]
+
+It maps a sequence of tokens to a matrix\\[2ex]
+
+{\bf Matrix rows are vectors corresponding to tokens}\\[2ex]
+
+The number of rows is the number of tokens in the sequence\\[2ex]
+
+Transformer layers {\bf update} this matrix:\\[2ex]
+
+\begin{verbatim}
+    def forward(self, x):
+        x = x + self.attn(self.ln_1(x))
+        x = x + self.mlpf(self.ln_2(x))
+        return x
+\end{verbatim}\\[2ex]
+
+The stream of changing $x$ is called {\bf residual stream}
+
+\end{frame}
+
+\subsection{``A Mathematical Framework for Transformer Circuits"}
+
+\begin{frame}
+
+  \frametitle{``A Mathematical Framework for Transformer Circuits"}
+
+I cover only the part Adam Nemecek is relying upon\footnote{\msblue{the links in the blue are the links I am planning to visit during the talk}}\\[2ex]
+
+The rest belongs to the overview part\\[2ex]
+
+\msblue{\href{https://transformer-circuits.pub/2021/framework/index.html}{\tt\small https://transformer-circuits.pub/2021/framework/index.html}}\\[2ex]
+
+Neel Nanda, ``A Walkthrough of A Mathematical Framework for Transformer Circuits", 2 hours 50 minutes:\\
+\href{https://www.youtube.com/watch?v=KV5gbOmHbjU}{\tt\small https://www.youtube.com/watch?v=KV5gbOmHbjU}\\[2ex]
+
+Tensor product of matrices (matrix direct product):\\
+\msblue{\href{https://en.wikipedia.org/wiki/Kronecker\_product}{\tt\small https://en.wikipedia.org/wiki/Kronecker\_product}}
+
+\msblue{\href{https://en.wikipedia.org/wiki/Vectorization\_(mathematics)\#Compatibility\_with\_Kronecker\_products}{\tt\tiny https://en.wikipedia.org/wiki/Vectorization\_(mathematics)\#Compatibility\_with\_Kronecker\_products}}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Main ideas}
+
+Papers usually describe implementations written for efficiency\\[2ex]
+
+Rewrite without thinking about efficiency in order to understand\\[2ex]
+
+Heads are independent from each other:\\[2ex]
+
+\begin{itemize}
+   \item Low-rank bottlenecks are ubiquitous 
+   \item Can compose heads from different layers\\[2ex]
+\end{itemize}
+
+$X$ is a rectangular matrix $M\times N$:\\[2ex]
+
+\begin{itemize}
+  \item $A X$ is well-formed, $A$ is a square matrix $M\times M$
+  \item But the $X W_{OV}$ for the output-value circuit\\[2ex]
+\end{itemize}
+
+Neel Nanda: use of tensor product is optional
+
+\end{frame}
+
+\section{Overview part}
+
+\begin{frame}
+
+  \frametitle{Structure of the overview part}
+
+This is a selection from a huge field:\\[2ex]
+
+\begin{itemize}
+  \item more on induction heads and such
+  \item more on low-rank motifs
+  \item interplay of Transformers and autoencoders
+  \item grokking and phase transitions
+  \item in-context learning and trying to improve Transformers
+  \item autoregressive models as simulators
+  \item GPT-4-related topic
+      \begin{itemize}
+          \item Mixture-of-Experts and Transformers
+          \item Impressions from base-GPT-4
+          \item state of advanced fine-tuning
+      \end{itemize}
+   \item misc
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{more on induction heads}
+
+Continue reading this paper and/or watching Neel Nanda video\\[2ex]
+
+\href{https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html}{\tt\tiny https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html}\\[2ex]
+
+\href{https://transformer-circuits.pub/2021/exercises/index.html}{\tt\small https://transformer-circuits.pub/2021/exercises/index.html}\\[2ex]
+
+\href{https://transformer-circuits.pub/2021/videos/index.html}{\tt\small https://transformer-circuits.pub/2021/videos/index.html}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{more on low-rank motifs}
+
+The main method of {\bf lightweight fine-tuning} instead of honest fine-tuning:
+Edward Hu et al. ``LoRA: Low-Rank Adaptation of Large Language Models", 
+\href{https://arxiv.org/abs/2106.09685}{\tt\small https://arxiv.org/abs/2106.09685l}\\[2ex]
+
+{\bf Used everywhere} for all kinds of applications, including\\[2ex]
+
+``LoRA Fine-tuning Efficiently Undoes Safety Training in Llama 2-Chat 70B",
+\href{https://arxiv.org/abs/2310.20624}{\tt\small https://arxiv.org/abs/2310.20624}\\[2ex]
+
+``MultiLoRA: Democratizing LoRA for Better Multi-Task Learning",
+\href{https://arxiv.org/abs/2311.11501}{\tt\small https://arxiv.org/abs/2311.11501}\\
+
+\hrulefill\\[1ex]
+
+People should play with really large number of attention heads,\\ i.e. with very low-dimensional heads,
+see what happens.
+
+\end{frame}
+
+
+\begin{frame}
+
+  \frametitle{interplay of Transformers and autoencoders 1}
+
+The most recent paper on \href{https://transformer-circuits.pub/}{\tt\small https://transformer-circuits.pub/} :\\[2ex]
+
+``Towards Monosemanticity: Decomposing Language Models With Dictionary Learning",  Oct 2023,
+\href{https://transformer-circuits.pub/2023/monosemantic-features/index.html}{\tt\footnotesize https://transformer-circuits.pub/2023/monosemantic-features/index.html}\\[2ex]
+
+{\bf Extracted features are linear combinations of neurons}; obtained by connecting a Transformer and a sparse autoencoder\\[2ex]
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{interplay of Transformers and autoencoders 2}
+
+Representation learning:\\[2ex]
+
+``AdaVAE: Exploring Adaptive GPT-2s in Variational Auto-Encoders for Language Modeling",
+\href{https://arxiv.org/abs/2205.05862}{\tt\small https://arxiv.org/abs/2205.05862}\\[2ex]
+
+The following Oct 2023 work by John David Pressman is built on top of that:
+``Revealing Intentionality In Language Models Through AdaVAE Guided Sampling":\\[0.5ex]
+
+\begin{minipage}{\linewidth}
+\hspace{-0.2in}
+\href{https://www.lesswrong.com/posts/4Hnso8NMAeeYs8Cta/revealing-intentionality-in-language-models-through-adavae}{\tt\tiny https://www.lesswrong.com/posts/4Hnso8NMAeeYs8Cta/revealing-intentionality-in-language-models-through-adavae}
+\end{minipage}
+\href{https://github.com/JD-P/minihf/tree/adavae-moe}{\tt\tiny https://github.com/JD-P/minihf/tree/adavae-moe}
+
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{grokking and phase transitions}
+
+My notes:\\[2ex]
+
+\href{https://github.com/anhinga/2022-notes/tree/main/Grokking-is-solved}{\tt\footnotesize https://github.com/anhinga/2022-notes/tree/main/Grokking-is-solved}\\[2ex]
+
+Discovered in 2021 by an OpenAI team, Alethea Power et al., ``Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets",
+\href{https://arxiv.org/abs/2201.02177}{\tt\small https://arxiv.org/abs/2201.02177}\\[2ex]
+
+{\bf Solved by Neel Nanda et al. in 2022} (see my notes).\\[2ex]
+
+At least, {\em that's my position}, however, there are a bunch of proposed alternative approaches to understanding the Grokking phenomenon,
+including even this generalization: ``Grokking Beyond Neural Networks: An Empirical Exploration with Model Complexity",
+\href{https://arxiv.org/abs/2310.17247}{\tt\small https://arxiv.org/abs/2310.17247}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{in-context learning and trying to improve Transformers 1}
+
+Many people looking from different angles independently discovered that {\bf attention layers perform
+``large-size steps of gradient descent" during one inference pass}.\\[2ex]
+
+For example, {\footnotesize``you can think of softmax attention as implementing a single, big gradient step of some energy function and that training transformers is akin to meta-learning how to best tune a stack of attention and feed-forward modules to perform well on some auxiliary (meta-)task(s)"}\\ 
+writes Matthias Bal in
+
+\begin{minipage}{\linewidth}
+\hspace{-0.2in}
+\href{https://mcbal.github.io/post/deep-implicit-attention-a-mean-field-theory-perspective-on-attention-mechanisms/}{\tt\tiny 
+https://mcbal.github.io/post/deep-implicit-attention-a-mean-field-theory-perspective-on-attention-mechanisms/}
+\end{minipage}
+
+See also his other blog format articles on ``Transformers Are Secretly Collectives of Spin Systems" and such at
+\href{https://mcbal.github.io/}{\tt\small https://mcbal.github.io/}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{in-context learning and trying to improve Transformers 2}
+
+Let's look at a couple of papers.\\[2ex]
+
+It is technically convenient to consider {\bf linear attention}, that is attention without {\bf softmax}.\\[2ex]
+
+Then one's has associativity here $(QK^T)V = Q(K^TV)$ which allows one to do various interesting things.\\[2ex]
+
+Note that linear-attention-only Transformer is still not a linear model, but a polynomial one, hence
+sufficiently expressive.\\[2ex]
+
+First, look at ``Exploring the Space of Key-Value-Query Models with Intention" by Garnelo and Czarnecki,
+\href{https://arxiv.org/abs/2305.10203}{\tt\small https://arxiv.org/abs/2305.10203} 
+
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{in-context learning and trying to improve Transformers 3}
+
+{\scriptsize ``Our goal is to determine whether there are any other stackable models in KVQ Space that Attention cannot efficiently approximate, which we can implement with our current deep learning toolbox and that solve problems that are interesting to the community. Maybe surprisingly, {\bf the solution to the standard least squares problem satisfies these properties.} A neural network module that is able to compute this solution not only enriches the set of computations that a neural network can represent but is also provably a strict generalisation of Linear Attention. Even more surprisingly the computational complexity of this module is exactly the same as that of Attention, making it a suitable drop in replacement."}\\[2ex]
+
+``the solution to
+a standard regularised least squares minimisation problem": $Q[KK^T + \alpha I]^{-1}K^TV$.\\[2ex]
+
+{\scriptsize (cf. also ``Multiplicative Interactions and Where to Find Them" (ICLR 2020),  
+\href{https://openreview.net/forum?id=rylnK6VtDH}{\tt\ https://openreview.net/forum?id=rylnK6VtDH})} 
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{in-context learning and trying to improve Transformers 4}
+
+Garnelo-Czarnecki paper has exactly one reference to it:\\[2ex]
+
+von Oswald et al., ``Uncovering mesa-optimization algorithms in Transformers",
+\href{https://arxiv.org/abs/2309.05858}{\tt\small https://arxiv.org/abs/2309.05858}\\[2ex]
+
+A very important, but not well-written paper, see also
+\href{https://twitter.com/oswaldjoh/status/1701873029100241241}{\tt\footnotesize https://twitter.com/oswaldjoh/status/1701873029100241241} and\\
+\href{https://gonzoml.substack.com/p/uncovering-mesa-optimization-algorithms}{\tt\footnotesize https://gonzoml.substack.com/p/uncovering-mesa-optimization-algorithms}\\[2ex]
+
+It has plenty of references to other independent discoveries that attention layers perform
+``large-size steps of gradient descent" during one inference pass.\\[2ex]
+
+But then it is trying to explain how earlier attention layers set up an optimization task
+on the fly, and subsequent attention layers solve it.
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{in-context learning and trying to improve Transformers 5}
+
+And it also explores replacing an attention layer by a (different)
+least-squares solver.\\[2ex]
+
+Page 2 contains the summary; read it, it is well written, explains the high level:
+\msblue{\href{https://arxiv.org/pdf/2309.05858.pdf}{\tt\small https://arxiv.org/pdf/2309.05858.pdf}}\\[2ex]
+
+{\bf In-context/few-shot learning} was first discovered in GPT-3, but the claim here
+is that this can work even in {\bf really small models.}\\[2ex]
+
+See also my notes at
+\href{https://dmm.dreamwidth.org/76107.html}{\tt\small https://dmm.dreamwidth.org/76107.html}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{autoregressive models as simulators 1}
+
+Even with GPT-2, I had a feeling that GPT-2 sampled an interlocutor for me from
+a distribution which depended on my initial prompt, and then I was having a chat with that interlocutor.\\[2ex]
+
+In September 2022, ``Janus" published a theory which made this much more precise.\\[2ex]
+
+I took extensive notes on that theory:\\[2ex]
+
+\href{https://github.com/anhinga/2022-notes/tree/main/Generative-autoregressive-models-are-similators}{\tt\tiny https://github.com/anhinga/2022-notes/tree/main/Generative-autoregressive-models-are-similators}\\[2ex]
+
+Rough approximation of what's going on: ``These models are simulators,
+they generate various virtual entities (which tend to be rather short-lived at the moment), and users are interacting with those virtual entities."
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{autoregressive models as simulators 2}
+
+Inference runs are simulations.\\[2ex]
+
+Simulations and virtual characters have widely differing properties from run to run.\\[2ex]
+
+The art of ``prompt engineering" is the art of tuning the simulation, so that it has
+the properties one currently wants.\\[2ex]
+
+This understanding might be the most important conceptual breakthrough of 2022.\\[2ex]
+
+On Nov 8 Murray Shanahan and ``Janus" co-authored a paper in {\em Nature}:
+``Role play with large language models",
+\msblue{\href{https://www.nature.com/articles/s41586-023-06647-8}{\tt\small https://www.nature.com/articles/s41586-023-06647-8}}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Mixture-of-Experts and Transformers (cf. GPT-4 rumors)}
+
+Romors are that GPT-4 is a {\bf mixture-of-experts}: \href{https://en.wikipedia.org/wiki/Mixture\_of\_experts}{\tt\small https://en.wikipedia.org/wiki/Mixture\_of\_experts}\\[2ex]
+
+Some people think this means that it's 8 GPT-3's working in parallel, with some of them
+running each time depending on the context, but I don't think so.\\[2ex]
+
+{\bf Mixture-of-experts} just means these days that a part of the overall model
+is activated during each inference run, basically, a {\bf dynamically computed sparse mask} 
+is applied on each run, otherwise the architecture can be rather arbitrary.\\[2ex]
+
+Huge diversity of hybrids between Mixture-of-Experts approach and Transformers.
+This is a field of science by itself:
+\msblue{\href{https://github.com/XueFuzhao/awesome-mixture-of-experts}{\tt\small https://github.com/XueFuzhao/awesome-mixture-of-experts}}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Impressions from base-GPT-4}
+
+It is difficult to obtain access to base-GPT-4 (the one before RLHF with all its
+trade-offs has been applied), but there is a procedure for interested researchers to apply.\\[2ex]
+
+{\bf base-GPT-4} is a very rich powerful model in the right hands, and it is much more
+versatile than GPT-4, but there is no handholding.\\[2ex]
+
+``Janus" kindly shared the impressions from their experience with {\bf base-GPT-4}
+in the answers here:\\[2ex]
+
+\msblue{\href{https://www.lesswrong.com/posts/tbJdxJMAiehewGpq2/impressions-from-base-gpt-4}{\tt\scriptsize https://www.lesswrong.com/posts/tbJdxJMAiehewGpq2/impressions-from-base-gpt-4}}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{state of advanced fine-tuning (GPT-3.5 vs. GPT-4)}
+
+Everybody is trying to sell lightweight fine-tuning, something inexpensive like LoRA (Low-Rank Adaptation), 
+but in such a fashion that the quality is high.\\[2ex]
+
+The reports for available GPT-3.5 fine-tuning were glowing (``GPT-4-like performance on the
+narrow area you fine-tune for").\\[2ex]
+
+However, GPT-4 fine-tuning currently is experiencing difficulties similar to early GPT-3 fine-tuning difficulties.\\[2ex]
+
+{\footnotesize ``Preliminary results indicate that GPT-4 fine-tuning requires more work to achieve meaningful improvements over the base model compared to the substantial gains realized with GPT-3.5 fine-tuning."}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{misc}
+
+A Swiss paper claiming to be able to do it well without skip connections:\\[2ex]
+
+``Simplifying Transformer Blocks", \href{https://arxiv.org/abs/2311.01906}{\tt\small https://arxiv.org/abs/2311.01906}
+and \href{https://github.com/bobby-he/simplified\_transformers}{\tt\small https://github.com/bobby-he/simplified\_transformers}\\
+
+\hrulefill\\[1ex]
+
+Claim: ``a family of white-box transformer-like deep network architectures, named CRATE (Coding RAte reduction TransformEr), which are mathematically fully interpretable":\\[2ex]
+
+``White-Box Transformers via Sparse Rate Reduction: Compression Is All There Is?",
+\href{https://arxiv.org/abs/2311.13110}{\tt\small https://arxiv.org/abs/2311.13110} and
+\href{https://github.com/Ma-Lab-Berkeley/CRATE}{\tt\small https://github.com/Ma-Lab-Berkeley/CRATE}
+
+\end{frame}
+
+\end{document}
