@@ -15,3 +15,9 @@ Materials for my JuliaCon 2023 talk:
 "Exploring synthesis of flexible neural machines with Zygote.jl":
 
 https://github.com/anhinga/DMM-synthesis-lab-journal/tree/main/JuliaCon2023-talk
+
+---
+
+November 27 talk overviewing the basics of GPT-2 and a selection of recent LLM-related papers and materials:
+
+[transformer-math](transformer-math)
