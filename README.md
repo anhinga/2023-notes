@@ -4,6 +4,10 @@ This is a continuation of
 
 https://github.com/anhinga/2022-notes
 
+This is continued at
+
+https://github.com/anhinga/2024-notes
+
 ---
 
 I did reactivate my studies of [non-anthropocentric approaches to AI existential safety](non-anthropocentric-ai-safety).
